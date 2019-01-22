@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 
 var registerRouter = require('./router/register');
 var loginRouter = require('./router/login');
+var messageRouter = require('./router/message');
 var errorRouter = require('./router/error');
 
 // 处理网址的任何method请求，全局调用
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
+app.use('/message', messageRouter);
 app.use('/404', errorRouter);
 
 app.use(function (req, res) {

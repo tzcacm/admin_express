@@ -5,8 +5,8 @@ var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     port: '3306',
-    password: '',
-    database: 'mysql'
+    password: '123456',
+    database: 'tzc'
 });
 
 var query = function (sql, callback) {

@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var query = require('../mysql/query');
+var md5 = require('md5-node');
 
 router.get('/', function (req, res) {
     var account = req.param('account');
@@ -34,7 +35,11 @@ router.get('/', function (req, res) {
                 for (var i = 0; i < vals.length; i++) {
                     if (vals[i].account == account) {
                         isExist = true;
-                        const data = { 'Success': true, Data: { account: vals[i].account, password: vals[i].password }, Message: '登陆成功' };
+                        if (md5(vals[i].password) == password) {
+                            var data = { 'Success': true, Data: { account: vals[i].account, password: vals[i].password }, Message: '登陆成功' };
+                        } else {
+                            var data = { 'Success': false, Message: '密码错误' };
+                        }
                         res.send(data);
                     }
                 }
