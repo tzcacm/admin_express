@@ -22,7 +22,7 @@ router.get('/', function (req, res) {
     }
 
     if (checkOut() != '') {
-        const data = { 'Success': true, Data: {}, Message: checkOut() };
+        const data = { 'Success': false, Data: {}, Message: checkOut() };
         res.send(data);
     } else {
         query("SELECT * FROM `register`", function (err, vals, fields) {
@@ -44,7 +44,7 @@ router.get('/', function (req, res) {
                     }
                 }
                 if (!isExist) {
-                    const data = { 'Success': true, Data: {}, Message: '账号不存在' };
+                    const data = { 'Success': false, Data: {}, Message: '账号不存在' };
                     res.send(data);
                 }
             }
