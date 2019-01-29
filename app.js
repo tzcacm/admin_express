@@ -9,6 +9,7 @@ var loginRouter = require('./router/login');
 var messageRouter = require('./router/message');
 var addMessageRouter = require('./router/addMessage');
 var delMessageRouter = require('./router/delMessage');
+var upLoadgeRouter = require('./router/upLoad');
 var errorRouter = require('./router/error');
 
 // 处理网址的任何method请求，全局调用
@@ -28,6 +29,7 @@ app.use('/login', loginRouter);
 app.use('/message', messageRouter);
 app.use('/addMessage', addMessageRouter);
 app.use('/delMessage', delMessageRouter);
+app.use('/upLoad', upLoadgeRouter);
 app.use('/404', errorRouter);
 
 app.use(function (req, res) {

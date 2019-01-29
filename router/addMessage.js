@@ -27,15 +27,28 @@ router.get('/', function (req, res) {
         const data = { 'Success': true, Data: {}, Message: checkOut() };
         res.send(data);
     } else {
-        query("insert into `message` (image,title,content) values (" + image + "," + title + "," + content + ")", function (err, vals, fields) {
-            if (err) {
-                const data = { 'Success': false, Data: {}, Message: '请求失败' };
-                res.send(data);
-            } else {
-                const data = { 'Success': true, Data: {}, Message: '请求成功' };
-                res.send(data);
-            }
+        fs.readdir('./uploads', function (err, files) {
+            if (err) { return };
+            fs.writeFile('./uploads',image, function (err, data) {
+                if(err){
+                    console.log('报错')
+                }
+                console.log('写入成功');
+            })
+            console.log(files);
         })
+
+
+
+        // query("insert into `message` (image,title,content) values (" + image + "," + title + "," + content + ")", function (err, vals, fields) {
+        //     if (err) {
+        //         const data = { 'Success': false, Data: {}, Message: '请求失败' };
+        //         res.send(data);
+        //     } else {
+        //         const data = { 'Success': true, Data: {}, Message: '请求成功' };
+        //         res.send(data);
+        //     }
+        // })
     }
 
 })
