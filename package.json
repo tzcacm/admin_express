@@ -11,9 +11,11 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "jsonwebtoken": "^9.0.0",
     "md5-node": "^1.0.1",
     "multiparty": "^4.2.1",
     "mysql": "^2.16.0",
+    "request": "^2.88.2",
     "supervisor": "^0.12.0"
   }
 }

@@ -3,14 +3,24 @@ var express = require('express');
 var router = express.Router();
 var query = require('../mysql/query');
 var md5 = require('md5-node');
+const jwt = require('jsonwebtoken');
+const wxInfoData = require('../utils/common')
 
-router.get('/', function (req, res) {
+router.post('/', function (req, res) {
+    console.log('请求登陆接口成功');
     var account = req.param('account');
     var password = req.param('password');
+    const token = req.body.token
+    // 验证token
+    jwt.verify(token, wxInfoData.tokenSecret, function (err, decode) {
+        if (err) {  //  时间失效的时候或者伪造的token          
+            res.send({ 'status': 0 });
+        } else {
+            res.send({ 'status': 1 });
+        }
+    })
 
-    console.log('请求登陆接口成功');
-
-    //检验数据
+    // 检验数据
     var checkOut = function () {
         var message = '';
         if (account == undefined || account == null || account == '') {
@@ -50,7 +60,6 @@ router.get('/', function (req, res) {
             }
         })
     }
-
 })
 
 module.exports = router;

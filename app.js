@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 
 var registerRouter = require('./router/register');
+var getAccetsTokenRouter = require('./router/getAccetsToken');
 var loginRouter = require('./router/login');
 var messageRouter = require('./router/message');
 var addMessageRouter = require('./router/addMessage');
@@ -25,6 +26,7 @@ app.all('*', function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/getAccetsToken', getAccetsTokenRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/message', messageRouter);
@@ -35,7 +37,7 @@ app.use('/readImage', readImageRouter);
 app.use('/404', errorRouter);
 
 app.use(function (req, res) {
-    res.send('报错了');
+    res.send('报错了1');
 });
 
 http.createServer(app).listen(9000, function () {
